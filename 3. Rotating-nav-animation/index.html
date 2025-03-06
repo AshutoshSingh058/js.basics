@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Rotating Navigation</title>
+</head>
+<body>
+    <div class="container">
+        <div class="circle-container">
+            <div class="circle">
+                <button id="close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <button id="open">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="content">
+            <section id="home" class="content-section active">
+                <h1>Welcome Home</h1>
+                <small>Your Safe Space</small>
+                <p>Discover a world of comfort in our home section. Explore our featured content and make yourself at home with our curated selection of articles.</p>
+                <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471?ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80" alt="Cozy home" class="content-img">
+                <p>Regularly updated with new content, find everything you need to create your perfect living space - from lifestyle tips to DIY projects.</p>
+            </section>
+
+            <section id="about" class="content-section">
+                <h1>About Our Mission</h1>
+                <small>Who We Are</small>
+                <p>Founded in 2020, we're dedicated to creating meaningful digital experiences that combine beauty with user-friendliness.</p>
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" alt="Team photo" class="content-img">
+                <p>With 5+ years of combined experience, we push boundaries while maintaining accessibility and usability as core principles.</p>
+            </section>
+
+            <section id="contact" class="content-section">
+                <h1>Get in Touch</h1>
+                <small>We're Here for You</small>
+                <p>Have questions or suggestions? Reach out through any of these channels:</p>
+                <img src="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80" alt="Contact us" class="content-img">
+                <p>Email: contact@example.com<br>
+                   Phone: (555) 123-4567<br>
+                   Address: 123 Web Street, Digital City</p>
+            </section>
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li class="active"><i class="fas fa-home"></i><a href="#home"> Home</a></li>
+            <li><i class="fas fa-user-alt"></i><a href="#about"> About</a></li>
+            <li><i class="fas fa-envelope"></i><a href="#contact"> Contact</a></li>
+        </ul>
+    </nav>
+    
+    <script src="script.js"></script>
+</body>
+</html>
