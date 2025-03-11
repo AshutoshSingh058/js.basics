@@ -1,79 +1,42 @@
-class BlurryLoader {
-    constructor() {
-        this.loadText = document.querySelector('.loading-text');
-        this.bg = document.querySelector('.bg');
-        this.progressBar = document.querySelector('.progress-bar');
-        this.progressContainer = document.querySelector('.progress-container');
-        this.completeText = document.createElement('div');
-        
-        this.init();
+const loadText = document.querySelector('.loading-text');
+const bg = document.querySelector('.bg');
+const circle = document.querySelector('.progress-ring__circle');
+const quote = document.querySelector('.quote-container');
+
+const radius = circle.r.baseVal.value;
+const circumference = 2 * Math.PI * radius;
+circle.style.strokeDasharray = circumference;
+circle.style.strokeDashoffset = circumference;
+
+let load = 0;
+let int = setInterval(blurring, 20); // Faster interval (from 30ms to 20ms)
+
+function blurring() {
+    load += 2; // Faster increment (was 1, now 2)
+
+    if (load > 100) {
+        load = 100;
+        clearInterval(int);
+        document.querySelector('.loading-container').classList.add('fade-out');
+        quote.classList.add('fade-in');
     }
 
-    init() {
-        this.completeText.classList.add('complete');
-        this.completeText.textContent = 'Loaded!';
-        document.body.appendChild(this.completeText);
-        
-        this.preloadImage().then(() => {
-            requestAnimationFrame((timestamp) => this.animate(timestamp));
-        });
-    }
+    loadText.innerText = `${load}%`;
+    loadText.style.opacity = scale(load, 0, 100, 1, 0);
+    bg.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`;
+    bg.style.transform = `scale(${scale(load, 0, 100, 1.1, 1)})`; // Slight zoom effect
 
-    preloadImage() {
-        return new Promise((resolve) => {
-            const img = new Image();
-            img.src = 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0';
-            img.onload = resolve;
-        });
-    }
+    // Progress Circle Animation
+    const offset = circumference - (load / 100) * circumference;
+    circle.style.strokeDashoffset = offset;
 
-    animate(startTime) {
-        const duration = 4000; // 4 seconds
-        startTime = startTime || performance.now();
-        const elapsed = performance.now() - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const easedProgress = this.easeOutQuad(progress);
-
-        const load = Math.floor(easedProgress * 100);
-        
-        this.updateDOM(load);
-        
-        if (progress < 1) {
-            requestAnimationFrame(() => this.animate(startTime));
-        } else {
-            this.onComplete();
-        }
-    }
-
-    updateDOM(load) {
-        this.loadText.textContent = `${load}%`;
-        this.loadText.style.opacity = this.scale(load, 0, 100, 1, 0);
-        this.bg.style.filter = `blur(${this.scale(load, 0, 100, 30, 0)}px)`;
-        this.progressBar.style.width = `${load}%`;
-    }
-
-    onComplete() {
-        // Hide loading text and progress bar
-        this.loadText.style.display = 'none';
-        this.progressContainer.style.opacity = '0';
-
-        // Show completion text
-        this.completeText.style.opacity = '1';
-        
-        // Fade out completion text after 2 seconds
-        setTimeout(() => {
-            this.completeText.style.opacity = '0';
-        }, 2000);
-    }
-
-    easeOutQuad(t) {
-        return t * (2 - t);
-    }
-
-    scale(num, in_min, in_max, out_min, out_max) {
-        return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+    // Show the quote earlier
+    if (load > 70) {
+        quote.classList.add('fade-in');
     }
 }
 
-// Initialize loader
-new BlurryLoader();
+// Scaling function
+const scale = (num, in_min, in_max, out_min, out_max) => {
+    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+};

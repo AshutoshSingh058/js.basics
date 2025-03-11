@@ -1,20 +1,24 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Advanced Blurry Loading</title>
+    <title>Stay Inspired | Blurry Loading</title>
 </head>
 <body>
     <section class="bg"></section>
-    <div class="overlay"></div>
+    
     <div class="loading-container">
+        <svg class="progress-ring" width="120" height="120">
+            <circle class="progress-ring__circle" stroke="white" stroke-width="8" fill="transparent"
+                r="50" cx="60" cy="60"/>
+        </svg>
         <div class="loading-text">0%</div>
-        <div class="progress-container">
-            <div class="progress-bar"></div>
-        </div>
+    </div>
+
+    <div class="quote-container">
+        <p class="quote-text">"Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle."</p>
     </div>
 
     <script src="script.js"></script>
